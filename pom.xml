@@ -15,6 +15,8 @@
 	<description>Interfaz del Gestor de Proyectos</description>
 	<properties>
 		<java.version>21</java.version>
+		<sonar.projectKey>com.mx.cbtis:Ejercicio5Cliente</sonar.projectKey>
+		<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -64,6 +66,11 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>5.8.0.7211</version>
 			</plugin>
 		</plugins>
 	</build>
