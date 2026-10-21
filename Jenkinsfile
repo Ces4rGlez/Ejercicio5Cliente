@@ -5,10 +5,6 @@ pipeline {
         maven 'Maven 3.9.9'
     }
 
-    options {
-        timestamps()
-    }
-
     stages {
         stage('Compilar y probar frontend') {
             steps {
