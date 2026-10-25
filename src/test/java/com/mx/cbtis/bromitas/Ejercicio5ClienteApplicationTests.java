@@ -8,6 +8,7 @@ class Ejercicio5ClienteApplicationTests {
 
 	@Test
 	void contextLoads() {
+		org.junit.jupiter.api.Assertions.assertNotNull(this);
 	}
 
 }
