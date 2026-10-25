@@ -12,6 +12,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -414,11 +415,13 @@ public class GestorControllerTest {
                     .thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
         });
 
+        Exception thrown = null;
         try {
             mockMvc.perform(post("/consultarUsuarios"));
         } catch (Exception e) {
-            // Error esperado al fallar el servicio backend
+            thrown = e;
         }
+        assertNotNull(thrown, "Se esperaba excepcion al fallar el servicio backend");
     }
 
     @Test
@@ -426,16 +429,18 @@ public class GestorControllerTest {
         mockedRestTemplate.close();
         mockedRestTemplate = Mockito.mockConstruction(RestTemplate.class, (mock, context) -> {
             when(mock.postForEntity(eq("http://localhost:8081/addUsuario"), any(), eq(Integer.class)))
-                    .thenThrow(new RestClientException("Conexión rechazada"));
+                    .thenThrow(new RestClientException("Conexion rechazada"));
         });
 
+        Exception thrown = null;
         try {
             mockMvc.perform(post("/saveUsuario")
                     .param("nombre", "Juan")
                     .contentType(MediaType.APPLICATION_FORM_URLENCODED));
         } catch (Exception e) {
-            // Error esperado por fallo de red
+            thrown = e;
         }
+        assertNotNull(thrown, "Se esperaba excepcion al fallar la conexion con backend");
     }
 
     @Test
@@ -449,13 +454,15 @@ public class GestorControllerTest {
         Proyectos p = new Proyectos();
         p.setId_proyecto(999);
 
+        Exception thrown = null;
         try {
             mockMvc.perform(post("/eliminarProyecto")
                     .content(objectMapper.writeValueAsString(p))
                     .contentType(MediaType.APPLICATION_JSON));
         } catch (Exception e) {
-            // Error esperado por 404
+            thrown = e;
         }
+        assertNotNull(thrown, "Se esperaba excepcion al no encontrar el proyecto");
     }
 
     @Test
@@ -470,13 +477,15 @@ public class GestorControllerTest {
         u.setNombre("Incorrecto");
         u.setContrasena("Mal");
 
+        Exception thrown = null;
         try {
             mockMvc.perform(post("/verificarLogin")
                     .content(objectMapper.writeValueAsString(u))
                     .contentType(MediaType.APPLICATION_JSON));
         } catch (Exception e) {
-            // Error esperado
+            thrown = e;
         }
+        assertNotNull(thrown, "Se esperaba excepcion con credenciales invalidas");
     }
 
     @Test
@@ -487,13 +496,15 @@ public class GestorControllerTest {
                     .thenThrow(new RestClientException("Read Timeout"));
         });
 
+        Exception thrown = null;
         try {
             mockMvc.perform(post("/eliminarTarea")
                     .content("{\"id_tarea\": 50}")
                     .contentType(MediaType.APPLICATION_JSON));
         } catch (Exception e) {
-            // Error esperado por timeout
+            thrown = e;
         }
+        assertNotNull(thrown, "Se esperaba excepcion al ocurrir timeout");
     }
 
     @Test
@@ -505,10 +516,12 @@ public class GestorControllerTest {
                     .thenThrow(new HttpServerErrorException(HttpStatus.BAD_GATEWAY));
         });
 
+        Exception thrown = null;
         try {
             mockMvc.perform(post("/consultarComentarios"));
         } catch (Exception e) {
-            // Error esperado
+            thrown = e;
         }
+        assertNotNull(thrown, "Se esperaba excepcion con respuesta erronea del backend");
     }
 }
