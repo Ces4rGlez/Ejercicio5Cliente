@@ -5,9 +5,6 @@ pipeline {
         maven 'Maven 3.9.9'
     }
 
-    options {
-        timestamps()
-    }
 
     stages {
         stage('Verificar JDK 21 y Maven') {
