@@ -77,12 +77,6 @@ pipeline {
                 pattern: 'target/site/jacoco/jacoco.xml'
             ]]
 
-            recordIssues(
-                enabledForFailure: true,
-                aggregatingResults: true,
-                tools: [semgrep(pattern: 'reportes/semgrep-frontend.json')]
-            )
-
             archiveArtifacts artifacts: 'target/*.jar, reportes/*.json',
                              allowEmptyArchive: true,
                              fingerprint: true
