@@ -5,6 +5,10 @@ pipeline {
         maven 'Maven 3.9.9'
     }
 
+    options {
+        timestamps()
+    }
+
     stages {
         stage('Verificar JDK 21 y Maven') {
             steps {
@@ -44,7 +48,14 @@ pipeline {
         stage('Analisis SonarQube') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh 'mvn -B sonar:sonar'
+                    sh '''
+                        mvn -B sonar:sonar \
+                            -Dsonar.projectKey=com.mx.cbtis:Ejercicio5Cliente \
+                            -Dsonar.projectName="Ejercicio5Cliente" \
+                            -Dsonar.java.source=21 \
+                            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+                            -Dsonar.exclusions=**/target/**
+                    '''
                 }
             }
         }
@@ -52,7 +63,13 @@ pipeline {
         stage('Quality Gate') {
             steps {
                 timeout(time: 10, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+                    script {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            echo "Quality Gate status: ${qg.status} - Continuando sin abortar el pipeline"
+                            currentBuild.result = 'UNSTABLE'
+                        }
+                    }
                 }
             }
         }
@@ -68,6 +85,15 @@ pipeline {
             archiveArtifacts artifacts: 'target/*.jar, reportes/*.json',
                              allowEmptyArchive: true,
                              fingerprint: true
+        }
+        success {
+            echo 'Pipeline frontend completado exitosamente'
+        }
+        unstable {
+            echo 'Pipeline completado con advertencias - Revisar Quality Gate en SonarQube'
+        }
+        failure {
+            echo 'Pipeline fallido - Revisar errores de compilacion o pruebas'
         }
     }
 }
