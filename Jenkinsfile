@@ -25,6 +25,22 @@ pipeline {
             }
         }
 
+        stage('Escaneo de Vulnerabilidades Semgrep') {
+            steps {
+                sh '''
+                    mkdir -p reportes
+                    if command -v docker >/dev/null 2>&1; then
+                        docker run --rm -v "$(pwd):/src" returntocorp/semgrep semgrep scan \
+                            --config auto \
+                            --exclude target \
+                            --json -o /src/reportes/semgrep-frontend.json || true
+                    elif command -v semgrep >/dev/null 2>&1; then
+                        semgrep scan --config auto --exclude target --json -o reportes/semgrep-frontend.json || true
+                    fi
+                '''
+            }
+        }
+
         stage('Analisis SonarQube') {
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -49,7 +65,7 @@ pipeline {
                 pattern: 'target/site/jacoco/jacoco.xml'
             ]]
 
-            archiveArtifacts artifacts: 'target/*.jar',
+            archiveArtifacts artifacts: 'target/*.jar, reportes/*.json',
                              allowEmptyArchive: true,
                              fingerprint: true
         }
