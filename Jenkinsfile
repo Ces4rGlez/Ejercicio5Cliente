@@ -85,6 +85,8 @@ pipeline {
             archiveArtifacts artifacts: 'target/*.jar, reportes/*.json, reportes/*.sarif',
                              allowEmptyArchive: true,
                              fingerprint: true
+
+            recordIssues tools: [sarif(pattern: 'reportes/*.sarif')]
         }
         success {
             echo 'Pipeline frontend completado exitosamente'
