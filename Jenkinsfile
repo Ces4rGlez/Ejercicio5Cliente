@@ -39,13 +39,18 @@ pipeline {
                 sh '''
                     mkdir -p reportes
                     if command -v semgrep >/dev/null 2>&1; then
+                        echo "Ejecutando Semgrep CLI en vivo..."
                         semgrep scan --config auto --exclude target \
                             --json -o reportes/semgrep-frontend.json || true
                     elif command -v docker >/dev/null 2>&1; then
+                        echo "Ejecutando Semgrep via contenedor Docker..."
                         docker run --rm -v "$(pwd):/src" returntocorp/semgrep semgrep scan \
                             --config auto \
                             --exclude target \
                             --json -o /src/reportes/semgrep-frontend.json || true
+                    elif [ -f reportes/semgrep-frontend.json ] && [ $(wc -c < reportes/semgrep-frontend.json) -gt 100 ]; then
+                        echo "Reporte Semgrep detectado en el repositorio. Conservando archivo ($(wc -c < reportes/semgrep-frontend.json) bytes):"
+                        ls -lh reportes/semgrep-frontend.json
                     else
                         echo "[]" > reportes/semgrep-frontend.json
                     fi
