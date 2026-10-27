@@ -1,0 +1,517 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Semgrep",
+          "semanticVersion": "1.181.1",
+          "informationUri": "https://semgrep.dev",
+          "rules": [
+            {
+              "id": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+              "name": "spring-http-request",
+              "shortDescription": {
+                "text": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request"
+              },
+              "fullDescription": {
+                "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "precision": "high",
+                "tags": [
+                  "security"
+                ]
+              }
+            },
+            {
+              "id": "html.security.audit.missing-integrity.missing-integrity",
+              "name": "missing-integrity",
+              "shortDescription": {
+                "text": "html.security.audit.missing-integrity.missing-integrity"
+              },
+              "fullDescription": {
+                "text": "This tag is missing an 'integrity' subresource integrity attribute. The 'integrity' attribute allows for the browser to verify that externally hosted files (for example from a CDN) are delivered without unexpected manipulation. Without this attribute, if an attacker can modify the externally hosted resource, this could lead to XSS and other types of attacks. To prevent this, include the base64-encoded cryptographic hash of the resource (file) you’re telling the browser to fetch in the 'integrity' attribute for all externally hosted files."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "precision": "high",
+                "tags": [
+                  "security"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 66,
+                  "startColumn": 6,
+                  "endLine": 68,
+                  "endColumn": 100
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 86,
+                  "startColumn": 6,
+                  "endLine": 88,
+                  "endColumn": 101
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 97,
+                  "startColumn": 3,
+                  "endLine": 101,
+                  "endColumn": 92
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 115,
+                  "startColumn": 3,
+                  "endLine": 118,
+                  "endColumn": 111
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 125,
+                  "startColumn": 3,
+                  "endLine": 129,
+                  "endColumn": 86
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 140,
+                  "startColumn": 3,
+                  "endLine": 141,
+                  "endColumn": 99
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 166,
+                  "startColumn": 3,
+                  "endLine": 170,
+                  "endColumn": 88
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 182,
+                  "startColumn": 6,
+                  "endLine": 185,
+                  "endColumn": 91
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 194,
+                  "startColumn": 6,
+                  "endLine": 197,
+                  "endColumn": 103
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 212,
+                  "startColumn": 3,
+                  "endLine": 217,
+                  "endColumn": 101
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 239,
+                  "startColumn": 3,
+                  "endLine": 241,
+                  "endColumn": 98
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 250,
+                  "startColumn": 3,
+                  "endLine": 252,
+                  "endColumn": 103
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 260,
+                  "startColumn": 3,
+                  "endLine": 264,
+                  "endColumn": 77
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 274,
+                  "startColumn": 3,
+                  "endLine": 277,
+                  "endColumn": 111
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 289,
+                  "startColumn": 3,
+                  "endLine": 290,
+                  "endColumn": 101
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 297,
+                  "startColumn": 3,
+                  "endLine": 298,
+                  "endColumn": 102
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 304,
+                  "startColumn": 3,
+                  "endLine": 308,
+                  "endColumn": 86
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "problem-based-packs.insecure-transport.java-spring.spring-http-request.spring-http-request",
+          "level": "warning",
+          "message": {
+            "text": "Checks for requests sent via Java Spring RestTemplate API to http:// URLS. This is dangerous because the server is attempting to connect to a website that does not encrypt traffic with TLS. Instead, send requests only to https:// URLS."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/java/com/mx/cbtis/controller/GestorController.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 319,
+                  "startColumn": 3,
+                  "endLine": 323,
+                  "endColumn": 96
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "html.security.audit.missing-integrity.missing-integrity",
+          "level": "warning",
+          "message": {
+            "text": "This tag is missing an 'integrity' subresource integrity attribute. The 'integrity' attribute allows for the browser to verify that externally hosted files (for example from a CDN) are delivered without unexpected manipulation. Without this attribute, if an attacker can modify the externally hosted resource, this could lead to XSS and other types of attacks. To prevent this, include the base64-encoded cryptographic hash of the resource (file) you’re telling the browser to fetch in the 'integrity' attribute for all externally hosted files."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/resources/templates/home.html",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 5,
+                  "endLine": 13,
+                  "endColumn": 110
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "html.security.audit.missing-integrity.missing-integrity",
+          "level": "warning",
+          "message": {
+            "text": "This tag is missing an 'integrity' subresource integrity attribute. The 'integrity' attribute allows for the browser to verify that externally hosted files (for example from a CDN) are delivered without unexpected manipulation. Without this attribute, if an attacker can modify the externally hosted resource, this could lead to XSS and other types of attacks. To prevent this, include the base64-encoded cryptographic hash of the resource (file) you’re telling the browser to fetch in the 'integrity' attribute for all externally hosted files."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Ejercicio5Clientemain/resources/templates/proyecto.html",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 2,
+                  "endLine": 9,
+                  "endColumn": 113
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

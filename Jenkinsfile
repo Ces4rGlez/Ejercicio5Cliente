@@ -82,7 +82,7 @@ pipeline {
                 pattern: 'target/site/jacoco/jacoco.xml'
             ]]
 
-            archiveArtifacts artifacts: 'target/*.jar, reportes/*.json',
+            archiveArtifacts artifacts: 'target/*.jar, reportes/*.json, reportes/*.sarif',
                              allowEmptyArchive: true,
                              fingerprint: true
         }
