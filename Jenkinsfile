@@ -28,6 +28,7 @@ pipeline {
                             -Dsonar.projectName="Ejercicio5Cliente" \
                             -Dsonar.java.source=21 \
                             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+                            -Dsonar.coverage.exclusions=**/*Application.java \
                             -Dsonar.exclusions=**/target/**
                     '''
                 }
