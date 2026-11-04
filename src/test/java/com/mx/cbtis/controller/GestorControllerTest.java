@@ -61,11 +61,11 @@ public class GestorControllerTest {
             ResponseEntity<Integer> successResponseInt = new ResponseEntity<>(1, HttpStatus.OK);
 
             // POST /addUsuario
-            when(mock.postForEntity(eq("http://localhost:8081/addUsuario"), any(), eq(Integer.class)))
+            when(mock.postForEntity(eq("https://localhost:8081/addUsuario"), any(), eq(Integer.class)))
                     .thenReturn(successResponseInt);
 
             // POST /addProyecto
-            when(mock.postForEntity(eq("http://localhost:8081/addProyecto"), any(), eq(Integer.class)))
+            when(mock.postForEntity(eq("https://localhost:8081/addProyecto"), any(), eq(Integer.class)))
                     .thenReturn(successResponseInt);
 
             // POST /buscarProyectos
@@ -77,16 +77,16 @@ public class GestorControllerTest {
             p1.setFecha_finalizacion("2026-12-31");
             p1.setEstado_proyecto("ACTIVO");
             p1.setFondo("#ffffff");
-            when(mock.postForObject(eq("http://localhost:8081/buscarProyectos"), any(), eq(Proyectos[].class)))
+            when(mock.postForObject(eq("https://localhost:8081/buscarProyectos"), any(), eq(Proyectos[].class)))
                     .thenReturn(new Proyectos[] { p1 });
 
             // GET /buscarProyecto
-            when(mock.getForObject(eq("http://localhost:8081/buscarProyecto?id_proyecto={id_proyecto}"),
+            when(mock.getForObject(eq("https://localhost:8081/buscarProyecto?id_proyecto={id_proyecto}"),
                     eq(Proyectos.class), any(Map.class)))
                     .thenReturn(p1);
 
             // DELETE /deleteProyecto
-            when(mock.exchange(eq("http://localhost:8081/deleteProyecto"), eq(HttpMethod.DELETE), any(HttpEntity.class), eq(Integer.class)))
+            when(mock.exchange(eq("https://localhost:8081/deleteProyecto"), eq(HttpMethod.DELETE), any(HttpEntity.class), eq(Integer.class)))
                     .thenReturn(successResponseInt);
 
             // POST /getUsuarioLogin
@@ -96,11 +96,11 @@ public class GestorControllerTest {
             u.setCorreo_electronico("test@mail.com");
             u.setContrasena("pass");
             u.setRol("ADMIN");
-            when(mock.postForEntity(eq("http://localhost:8081/getUsuarioLogin"), any(), eq(Usuario.class)))
+            when(mock.postForEntity(eq("https://localhost:8081/getUsuarioLogin"), any(), eq(Usuario.class)))
                     .thenReturn(new ResponseEntity<>(u, HttpStatus.OK));
 
             // POST /buscarUsuarios
-            when(mock.postForObject(eq("http://localhost:8081/buscarUsuarios"), any(), eq(Usuario[].class)))
+            when(mock.postForObject(eq("https://localhost:8081/buscarUsuarios"), any(), eq(Usuario[].class)))
                     .thenReturn(new Usuario[] { u });
 
             // POST /getTarea
@@ -112,37 +112,37 @@ public class GestorControllerTest {
             t1.setFecha_vencimiento("2026-06-01");
             t1.setLista("Pendiente");
             t1.setEstado("PENDIENTE");
-            when(mock.postForObject(eq("http://localhost:8081/getTarea"), any(), eq(Tareas[].class)))
+            when(mock.postForObject(eq("https://localhost:8081/getTarea"), any(), eq(Tareas[].class)))
                     .thenReturn(new Tareas[] { t1 });
 
             // POST /buscarTareas
-            when(mock.postForObject(eq("http://localhost:8081/buscarTareas"), any(), eq(Tareas[].class)))
+            when(mock.postForObject(eq("https://localhost:8081/buscarTareas"), any(), eq(Tareas[].class)))
                     .thenReturn(new Tareas[] { t1 });
 
             // GET /buscarTarea
-            when(mock.getForObject(eq("http://localhost:8081/buscarTarea?id_tarea={id_tarea}"),
+            when(mock.getForObject(eq("https://localhost:8081/buscarTarea?id_tarea={id_tarea}"),
                     eq(Tareas.class), any(Map.class)))
                     .thenReturn(t1);
 
             // POST /addTareas
-            when(mock.postForEntity(eq("http://localhost:8081/addTareas"), any(), eq(Integer.class)))
+            when(mock.postForEntity(eq("https://localhost:8081/addTareas"), any(), eq(Integer.class)))
                     .thenReturn(successResponseInt);
 
             // DELETE /deleteTareas
-            when(mock.exchange(eq("http://localhost:8081/deleteTareas"), eq(HttpMethod.DELETE), any(HttpEntity.class), eq(Integer.class)))
+            when(mock.exchange(eq("https://localhost:8081/deleteTareas"), eq(HttpMethod.DELETE), any(HttpEntity.class), eq(Integer.class)))
                     .thenReturn(successResponseInt);
 
             // POST /getComentario
             Comentarios c1 = new Comentarios(50, "1", 10, "Comentario 1", "2026-04-01");
-            when(mock.postForObject(eq("http://localhost:8081/getComentario"), any(), eq(Comentarios[].class)))
+            when(mock.postForObject(eq("https://localhost:8081/getComentario"), any(), eq(Comentarios[].class)))
                     .thenReturn(new Comentarios[] { c1 });
 
             // POST /buscarComentarios
-            when(mock.postForObject(eq("http://localhost:8081/buscarComentarios"), any(), eq(Comentarios[].class)))
+            when(mock.postForObject(eq("https://localhost:8081/buscarComentarios"), any(), eq(Comentarios[].class)))
                     .thenReturn(new Comentarios[] { c1 });
 
             // POST /addComentario
-            when(mock.postForEntity(eq("http://localhost:8081/addComentario"), any(), eq(Integer.class)))
+            when(mock.postForEntity(eq("https://localhost:8081/addComentario"), any(), eq(Integer.class)))
                     .thenReturn(successResponseInt);
         });
     }
@@ -410,7 +410,7 @@ public class GestorControllerTest {
     public void testConsultarUsuarios_BackendError() {
         mockedRestTemplate.close();
         mockedRestTemplate = Mockito.mockConstruction(RestTemplate.class, (mock, context) -> {
-            when(mock.postForObject(eq("http://localhost:8081/buscarUsuarios"), any(HttpHeaders.class),
+            when(mock.postForObject(eq("https://localhost:8081/buscarUsuarios"), any(HttpHeaders.class),
                     eq(Usuario[].class)))
                     .thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
         });
@@ -428,7 +428,7 @@ public class GestorControllerTest {
     public void testSaveUsuario_BackendError() {
         mockedRestTemplate.close();
         mockedRestTemplate = Mockito.mockConstruction(RestTemplate.class, (mock, context) -> {
-            when(mock.postForEntity(eq("http://localhost:8081/addUsuario"), any(), eq(Integer.class)))
+            when(mock.postForEntity(eq("https://localhost:8081/addUsuario"), any(), eq(Integer.class)))
                     .thenThrow(new RestClientException("Conexion rechazada"));
         });
 
@@ -447,7 +447,7 @@ public class GestorControllerTest {
     public void testEliminarProyecto_NotFound() {
         mockedRestTemplate.close();
         mockedRestTemplate = Mockito.mockConstruction(RestTemplate.class, (mock, context) -> {
-            when(mock.exchange(eq("http://localhost:8081/deleteProyecto"), eq(HttpMethod.DELETE), any(), eq(Integer.class)))
+            when(mock.exchange(eq("https://localhost:8081/deleteProyecto"), eq(HttpMethod.DELETE), any(), eq(Integer.class)))
                     .thenThrow(new HttpServerErrorException(HttpStatus.NOT_FOUND));
         });
 
@@ -469,7 +469,7 @@ public class GestorControllerTest {
     public void testVerificarLogin_InvalidData() {
         mockedRestTemplate.close();
         mockedRestTemplate = Mockito.mockConstruction(RestTemplate.class, (mock, context) -> {
-            when(mock.postForEntity(eq("http://localhost:8081/getUsuarioLogin"), any(), eq(Usuario.class)))
+            when(mock.postForEntity(eq("https://localhost:8081/getUsuarioLogin"), any(), eq(Usuario.class)))
                     .thenThrow(new HttpServerErrorException(HttpStatus.BAD_REQUEST));
         });
 
@@ -492,7 +492,7 @@ public class GestorControllerTest {
     public void testEliminarTarea_BackendTimeout() {
         mockedRestTemplate.close();
         mockedRestTemplate = Mockito.mockConstruction(RestTemplate.class, (mock, context) -> {
-            when(mock.exchange(eq("http://localhost:8081/deleteTareas"), eq(HttpMethod.DELETE), any(), eq(Integer.class)))
+            when(mock.exchange(eq("https://localhost:8081/deleteTareas"), eq(HttpMethod.DELETE), any(), eq(Integer.class)))
                     .thenThrow(new RestClientException("Read Timeout"));
         });
 
@@ -511,7 +511,7 @@ public class GestorControllerTest {
     public void testConsultarComentarios_MalformedResponse() {
         mockedRestTemplate.close();
         mockedRestTemplate = Mockito.mockConstruction(RestTemplate.class, (mock, context) -> {
-            when(mock.postForObject(eq("http://localhost:8081/buscarComentarios"), any(HttpHeaders.class),
+            when(mock.postForObject(eq("https://localhost:8081/buscarComentarios"), any(HttpHeaders.class),
                     eq(Comentarios[].class)))
                     .thenThrow(new HttpServerErrorException(HttpStatus.BAD_GATEWAY));
         });
