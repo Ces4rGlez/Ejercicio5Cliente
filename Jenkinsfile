@@ -39,22 +39,28 @@ pipeline {
             steps {
                 sh '''
                     mkdir -p reportes
+                    rm -f reportes/semgrep-frontend.json reportes/semgrep-frontend.sarif
+
                     if command -v semgrep >/dev/null 2>&1; then
-                        echo "Ejecutando Semgrep CLI en vivo..."
-                        semgrep scan --config auto --exclude target \
-                            --json -o reportes/semgrep-frontend.json || true
+                        echo "Ejecutando Semgrep CLI..."
+                        semgrep scan --config auto --exclude target . \
+                            --json-output reportes/semgrep-frontend.json \
+                            --sarif-output reportes/semgrep-frontend.sarif
                     elif command -v docker >/dev/null 2>&1; then
                         echo "Ejecutando Semgrep via contenedor Docker..."
-                        docker run --rm -v "$(pwd):/src" returntocorp/semgrep semgrep scan \
+                        docker run --rm -v "$(pwd):/src" -w /src returntocorp/semgrep semgrep scan \
                             --config auto \
                             --exclude target \
-                            --json -o /src/reportes/semgrep-frontend.json || true
-                    elif [ -f reportes/semgrep-frontend.json ] && [ $(wc -c < reportes/semgrep-frontend.json) -gt 100 ]; then
-                        echo "Reporte Semgrep detectado en el repositorio. Conservando archivo ($(wc -c < reportes/semgrep-frontend.json) bytes):"
-                        ls -lh reportes/semgrep-frontend.json
+                            . \
+                            --json-output /src/reportes/semgrep-frontend.json \
+                            --sarif-output /src/reportes/semgrep-frontend.sarif
                     else
-                        echo "[]" > reportes/semgrep-frontend.json
+                        echo "No se encontró Semgrep CLI ni Docker; no es posible generar los reportes." >&2
+                        exit 1
                     fi
+
+                    test -s reportes/semgrep-frontend.json
+                    test -s reportes/semgrep-frontend.sarif
                 '''
             }
         }
