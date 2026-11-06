@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    options {
+        disableConcurrentBuilds()
+    }
+
     tools {
         maven 'Maven 3.9.9'
     }
@@ -84,16 +88,22 @@ pipeline {
 
     post {
         always {
-            recordCoverage tools: [[
-                parser: 'JACOCO',
-                pattern: 'target/site/jacoco/jacoco.xml'
-            ]]
+            script {
+                if (getContext(hudson.FilePath) != null) {
+                    recordCoverage tools: [[
+                        parser: 'JACOCO',
+                        pattern: 'target/site/jacoco/jacoco.xml'
+                    ]]
 
-            archiveArtifacts artifacts: 'target/*.jar, reportes/*.json, reportes/*.sarif',
-                             allowEmptyArchive: true,
-                             fingerprint: true
+                    archiveArtifacts artifacts: 'target/*.jar, reportes/*.json, reportes/*.sarif',
+                                     allowEmptyArchive: true,
+                                     fingerprint: true
 
-            recordIssues tools: [sarif(pattern: 'reportes/*.sarif')]
+                    recordIssues tools: [sarif(pattern: 'reportes/*.sarif')]
+                } else {
+                    echo 'No hay workspace disponible; se omiten la cobertura y los reportes de este build.'
+                }
+            }
         }
         success {
             echo 'Pipeline frontend completado exitosamente'
