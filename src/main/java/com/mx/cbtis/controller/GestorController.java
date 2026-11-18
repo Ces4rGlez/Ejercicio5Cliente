@@ -150,15 +150,37 @@ public class GestorController {
 	}
 	
 	
-	@PostMapping("/verificarLogin")
-	public ResponseEntity<Usuario> verificarUsuario(@RequestBody Usuario paramUser) {
-		String urlservicebd = getBackendUrl("/getUsuarioLogin");
-		RestTemplate  template = new RestTemplate();
-		ResponseEntity<Usuario> response = template.postForEntity(urlservicebd,paramUser,Usuario.class);
-		
-		return response;
-
+	@GetMapping("/debug-config")
+	@org.springframework.web.bind.annotation.ResponseBody
+	public Map<String, Object> getDebugConfig() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("backendBaseUrl", backendBaseUrl);
+		map.put("effectiveBackendUrl", getBackendUrl("/getUsuarioLogin"));
+		map.put("env_BACKEND_SERVICE_URL", System.getenv("BACKEND_SERVICE_URL"));
+		map.put("env_BACKEND_URL", System.getenv("BACKEND_URL"));
+		return map;
 	}
+
+	@PostMapping("/verificarLogin")
+	public ResponseEntity<?> verificarUsuario(@RequestBody Usuario paramUser) {
+		String urlservicebd = getBackendUrl("/getUsuarioLogin");
+		System.out.println(">>> [verificarLogin] Conectando a: " + urlservicebd);
+		try {
+			RestTemplate template = new RestTemplate();
+			ResponseEntity<Usuario> response = template.postForEntity(urlservicebd, paramUser, Usuario.class);
+			System.out.println(">>> [verificarLogin] Respuesta de backend: " + response.getStatusCode());
+			return response;
+		} catch (Exception e) {
+			System.err.println(">>> [verificarLogin] ERROR conectando a backend: " + e.getMessage());
+			e.printStackTrace();
+			Map<String, String> err = new HashMap<>();
+			err.put("error", e.getClass().getName());
+			err.put("message", e.getMessage());
+			err.put("targetUrl", urlservicebd);
+			return ResponseEntity.status(500).body(err);
+		}
+	}
+
 	
 	/*@PostMapping("/obtenerTareas")
 	public ResponseEntity<Object> obtenerTareas(@RequestBody Tareas idProyecto, Model modelo) {
