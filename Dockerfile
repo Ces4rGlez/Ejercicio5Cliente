@@ -9,6 +9,6 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-ENV PORT=8080
-EXPOSE 8080
+ENV PORT=10000
+EXPOSE 10000
 ENTRYPOINT ["sh", "-c", "java -Xms128m -Xmx256m -Xss256k -XX:+UseSerialGC -XX:TieredStopAtLevel=1 -jar app.jar"]
