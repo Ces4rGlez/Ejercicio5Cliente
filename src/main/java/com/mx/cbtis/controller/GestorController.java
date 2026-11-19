@@ -162,23 +162,11 @@ public class GestorController {
 	}
 
 	@PostMapping("/verificarLogin")
-	public ResponseEntity<?> verificarUsuario(@RequestBody Usuario paramUser) {
+	public ResponseEntity<Usuario> verificarUsuario(@RequestBody Usuario paramUser) {
 		String urlservicebd = getBackendUrl("/getUsuarioLogin");
-		System.out.println(">>> [verificarLogin] Conectando a: " + urlservicebd);
-		try {
-			RestTemplate template = new RestTemplate();
-			ResponseEntity<Usuario> response = template.postForEntity(urlservicebd, paramUser, Usuario.class);
-			System.out.println(">>> [verificarLogin] Respuesta de backend: " + response.getStatusCode());
-			return response;
-		} catch (Exception e) {
-			System.err.println(">>> [verificarLogin] ERROR conectando a backend: " + e.getMessage());
-			e.printStackTrace();
-			Map<String, String> err = new HashMap<>();
-			err.put("error", e.getClass().getName());
-			err.put("message", e.getMessage());
-			err.put("targetUrl", urlservicebd);
-			return ResponseEntity.status(500).body(err);
-		}
+		RestTemplate template = new RestTemplate();
+		ResponseEntity<Usuario> response = template.postForEntity(urlservicebd, paramUser, Usuario.class);
+		return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
 	}
 
 	
@@ -326,7 +314,7 @@ public class GestorController {
 		String urlservicebd = getBackendUrl("/addTareas");
 		RestTemplate template = new RestTemplate();
 		ResponseEntity<Integer> response = template.postForEntity(urlservicebd, paramName, Integer.class);
-		return response;
+		return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
 	}
 	
 	@PostMapping("/cambiosTareas")
@@ -334,7 +322,7 @@ public class GestorController {
 		String urlservicebd = getBackendUrl("/addTareas");
 		RestTemplate template = new RestTemplate();
 		ResponseEntity<Integer> response = template.postForEntity(urlservicebd, paramDatos, Integer.class);
-		return response;
+		return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
 	}
 	
 	@PostMapping("/consultarTareas")
